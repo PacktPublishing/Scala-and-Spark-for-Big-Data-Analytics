@@ -1,0 +1,7 @@
+//RDD Each record converted to upper case
+
+val statesPopulationRDD = sc.textFile("statesPopulation.csv")
+statesPopulationRDD.take(5)
+
+val upperCaseRDD = statesPopulationRDD.map(_.toUpperCase)
+upperCaseRDD.take(10)

@@ -1,0 +1,5 @@
+//Execution plan of group by and summation population by state
+
+val statesDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+statesDF.groupBy("State").agg(sum("Population").alias("Total")).explain(true)	

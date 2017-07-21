@@ -1,0 +1,6 @@
+//Transformation of an existing RDD
+
+val rdd_one = sc.parallelize(Seq(1,2,3))
+rdd_one.take(10)
+val rdd_one_x2 = rdd_one.map(i => i * 2)
+rdd_one_x2.take(10)

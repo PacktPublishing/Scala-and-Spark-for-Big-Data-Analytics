@@ -1,0 +1,8 @@
+//jointypes working with a sample dataset
+
+val statesPopulationDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+val statesTaxRatesDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesTaxRates.csv")
+
+statesPopulationDF.count
+statesTaxRatesDF.count

@@ -1,0 +1,10 @@
+//RDD Pairs
+
+
+val statesPopulationRDD = sc.textFile("statesPopulation.csv")
+statesPopulationRDD.first
+
+statesPopulationRDD.take(5)
+
+val pairRDD = statesPopulationRDD.map(record => (record.split(",")(0), record.split(",")(2)))
+pairRDD.take(10)

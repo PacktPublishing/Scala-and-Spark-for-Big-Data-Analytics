@@ -1,0 +1,7 @@
+//Sort Operation on Table
+val statesDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+statesDF.createOrReplaceTempView("states")
+
+statesDF.sort(col("Population").desc).show(5)
+spark.sql("select * from states order by Population desc limit 5").show

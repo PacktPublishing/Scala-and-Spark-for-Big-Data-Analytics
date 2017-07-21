@@ -1,0 +1,23 @@
+import org.apache.spark._
+import org.apache.spark.streaming._
+import org.apache.spark.streaming.twitter._
+import twitter4j.auth.OAuthAuthorization
+import twitter4j.conf.ConfigurationBuilder
+
+//you can replace the next 4 settings with your own twitter account settings.
+System.setProperty("twitter4j.oauth.consumerKey", "8wVysSpBc0LGzbwKMRh8hldSm") 
+System.setProperty("twitter4j.oauth.consumerSecret", "FpV5MUDWliR6sInqIYIdkKMQEKaAUHdGJkEb4MVhDkh7dXtXPZ") 
+System.setProperty("twitter4j.oauth.accessToken", "817207925756358656-yR0JR92VBdA2rBbgJaF7PYREbiV8VZq") 
+System.setProperty("twitter4j.oauth.accessTokenSecret", "JsiVkUItwWCGyOLQEtnRpEhbXyZS9jNSzcMtycn68aBaS")
+
+val ssc = new StreamingContext(sc, Seconds(10))
+
+val twitterStream = TwitterUtils.createStream(ssc, None)
+
+twitterStream.saveAsTextFiles("streamouts/tweets", "txt")
+
+ssc.start()
+
+//wait for 30 seconds
+
+ss.stop(false)

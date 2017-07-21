@@ -1,0 +1,6 @@
+number\tproduct_name\ttransaction_id\twebsite\tprice\tdate
+0\tjeans\t30160906182001\tebay.com\t100\t12-02-2016
+1\tcamera\t70151231120504\tamazon.com\t450\t09-08-2017
+2\tlaptop\t90151231120504\tebay.ie\t1500\t07--5-2016
+3\tbook\t80151231120506\tpackt.com\t45\t03-12-2016
+4\tdrone\t8876531120508\talibaba.com\t120\t01-05-2017

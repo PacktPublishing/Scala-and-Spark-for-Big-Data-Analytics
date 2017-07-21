@@ -1,0 +1,6 @@
+//Creating Streaming Context
+
+val ssc = new StreamingContext(sc, Seconds(10))
+
+val conf = new SparkConf().setMaster("local[1]").setAppName("TextStreams")
+val ssc = new StreamingContext(conf, Seconds(10))

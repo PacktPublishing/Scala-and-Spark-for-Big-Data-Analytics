@@ -1,0 +1,16 @@
+//Creating streamingcontext from sparkcontext
+val ssc = new StreamingContext(sc, Seconds(5))
+
+//DStream from Streaming Context
+val twitterStream = TwitterUtils.createStream(ssc, None)
+
+//Transformations and actions applied to each RDD
+val aggStream = twitterStream.flatMap(x => x.getText.split(" ")).filter(_.startsWith("#")).map(x => (x, 1)).reduceByKey(_ + _)
+
+
+//streaming application started 
+ssc.start()
+ssc.stop(false)
+
+//Applying flatmap
+val wordStream = twitterStream.flatMap(x => x.getText().split(" "))

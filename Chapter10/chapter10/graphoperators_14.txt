@@ -1,0 +1,5 @@
+//Graph operators
+
+graph.vertices.collect
+
+graph.edges.collect

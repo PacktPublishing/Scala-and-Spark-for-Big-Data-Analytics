@@ -1,0 +1,20 @@
+//right outer join
+
+val statesPopulationDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+val statesTaxRatesDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesTaxRates.csv")
+
+statesPopulationDF.createOrReplaceTempView("statesPopulationDF")
+statesTaxRatesDF.createOrReplaceTempView("statesTaxRatesDF")
+
+
+val joinDF = statesPopulationDF.join(statesTaxRatesDF, statesPopulationDF("State") === statesTaxRatesDF("State"), "rightouter")
+
+val joinDF = spark.sql("SELECT * FROM statesPopulationDF RIGHT OUTER JOIN statesTaxRatesDF ON statesPopulationDF.State = statesTaxRatesDF.State")
+
+
+joinDF.count
+
+joinDF.show
+
+

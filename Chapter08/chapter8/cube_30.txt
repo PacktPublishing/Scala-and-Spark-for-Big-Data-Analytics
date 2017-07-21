@@ -1,0 +1,5 @@
+//Cube
+val statesPopulationDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+
+statesPopulationDF.cube("State", "Year").count.show(5)

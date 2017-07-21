@@ -1,0 +1,10 @@
+//Year as Key, generating Pair RDD
+
+val statesPopulationRDD = sc.textFile("statesPopulation.csv")
+statesPopulationRDD.take(5)
+
+
+val pairRDD = statesPopulationRDD.map(record => record.split(",")).map(t => (t(1), (t(0), t(2))))
+
+pairRDD.take(5)
+

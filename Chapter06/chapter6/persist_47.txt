@@ -1,0 +1,9 @@
+//Persist
+
+import org.apache.spark.storage.StorageLevel
+rdd_one.persist(StorageLevel.MEMORY_ONLY)
+rdd_one.unpersist()
+rdd_one.persist(StorageLevel.DISK_ONLY)
+rdd_one.unpersist()
+
+

@@ -1,0 +1,9 @@
+//Double RDD
+
+
+val rdd_one = sc.parallelize(Seq(1.0,2.0,3.0))
+rdd_one.mean
+rdd_one.min
+rdd_one.max
+
+rdd_one.stdev

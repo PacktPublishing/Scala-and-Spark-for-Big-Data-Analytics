@@ -1,0 +1,10 @@
+//Sequence RDD
+
+
+val statesPopulationRDD = sc.textFile("statesPopulation.csv")
+statesPopulationRDD.take(5)
+
+val pairRDD = statesPopulationRDD.map(record => (record.split(",")(0), record.split(",")(2)))
+pairRDD.saveAsSequenceFile("seqfile")
+val seqRDD = sc.sequenceFile[String, String]("seqfile")
+seqRDD.take(10)

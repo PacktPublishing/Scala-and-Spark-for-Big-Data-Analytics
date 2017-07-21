@@ -1,0 +1,23 @@
+val statesPopulationRDD = sc.textFile("statesPopulation.csv").filter(_.split(",")(0) != "State") 
+statesPopulationRDD.take(10)
+
+val pairRDD = statesPopulationRDD.map(record => record.split(",")).map(t => (t(0), (t(1).toInt, t(2).toInt)))
+pairRDD.take(10)
+
+val groupedRDD = pairRDD.groupByKey.map(x => {var sum=0; x._2.foreach(sum += _._2); (x._1, sum)})
+groupedRDD.take(10)
+
+val reduceRDD = pairRDD.reduceByKey((x, y) => (x._1, x._2+y._2)).map(x => (x._1, x._2._2))
+reduceRDD.take(10)
+
+val initialSet = 0
+val addToSet = (s: Int, v: (Int, Int)) =>  s+ v._2
+val mergePartitionSets = (p1: Int, p2: Int) => p1 + p2
+val aggregatedRDD = pairRDD.aggregateByKey(initialSet)(addToSet, mergePartitionSets)
+aggregatedRDD.take(10)
+
+val createCombiner = (x:(Int,Int)) => x._2
+val mergeValues = (c:Int, x:(Int, Int)) =>  c +x._2
+val mergeCombiners = (c1:Int, c2:Int) => c1 + c2
+val combinedRDD = pairRDD.combineByKey(createCombiner, mergeValues, mergeCombiners)
+combinedRDD.take(10)

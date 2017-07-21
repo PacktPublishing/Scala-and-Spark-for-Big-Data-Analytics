@@ -1,0 +1,19 @@
+//Using alluxio with spark
+
+//Set alluxio filesystem configuration in shell
+
+sc.hadoopConfiguration.set("fs.alluxio.impl", "alluxio.hadoop.FileSystem")
+
+//load textfile from alluxio
+
+val alluxioFile = sc.textFile("alluxio://localhost:19998/Sentiment_Analysis_Dataset10k.csv")
+
+alluxioFile.count
+
+//load same textfile from local file system
+
+val localFile = sc.textFile("Sentiment_Analysis_Dataset10k.csv")
+
+localFile.count
+
+

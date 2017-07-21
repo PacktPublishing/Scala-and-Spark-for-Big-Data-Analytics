@@ -1,0 +1,4 @@
+//New Hadoop RDD
+
+val rdd_whole = sc.wholeTextFiles("wiki1.txt")
+rdd_whole.toDebugString

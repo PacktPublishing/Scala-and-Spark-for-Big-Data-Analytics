@@ -1,0 +1,10 @@
+import org.apache.spark.sql.Encoders
+
+//Encoders
+Encoders.product[(Integer, String)].schema.printTreeString
+
+//Can define a case class so not as complicated all the time
+case class Record(i: Integer, s: String)
+
+//Using encoders
+Encoders.product[Record].schema.printTreeString

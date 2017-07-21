@@ -1,0 +1,4 @@
+//Parallelizing a Connection
+
+val rdd_one = sc.parallelize(Seq(1,2,3))
+rdd_one.take(10)

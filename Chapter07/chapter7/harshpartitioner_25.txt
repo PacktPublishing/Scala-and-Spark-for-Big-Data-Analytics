@@ -1,0 +1,7 @@
+//Harsh Partitioner
+
+val str = "hello"
+str.hashCode
+val numPartitions = 8
+val partitionIndex = str.hashCode % numPartitions
+

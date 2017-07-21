@@ -1,0 +1,9 @@
+//agg operation on the dataframe columns
+
+val statesDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+statesDF.groupBy("State").agg(sum("Population").alias("Total")).show(5)
+
+statesDF.createOrReplaceTempView("states")
+
+spark.sql("select State, sum(Population) as Total from states group by State limit 5").show

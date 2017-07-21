@@ -1,0 +1,10 @@
+//inner join
+
+joinDF.count
+
+joinDF.show
+
+//Can also run explain()
+
+joinDF.explain
+

@@ -1,0 +1,8 @@
+//Filters
+
+val statesDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+statesDF.filter("State == 'California'").explain(true)
+
+//Execution as Shown Below
+statesDF.filter("State == 'California'").show

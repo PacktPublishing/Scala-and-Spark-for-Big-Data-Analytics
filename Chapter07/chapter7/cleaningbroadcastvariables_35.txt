@@ -1,0 +1,8 @@
+//Cleaning broadcast variables
+
+val rdd_one = sc.parallelize(Seq(1,2,3))
+val k = 5
+val bk = sc.broadcast(k)
+rdd_one.map(j => j + bk.value).take(5)
+bk.unpersist
+rdd_one.map(j => j + bk.value).take(5)

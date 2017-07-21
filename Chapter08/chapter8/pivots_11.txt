@@ -1,0 +1,4 @@
+//Pivots
+val statesDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+statesDF.groupBy("State").pivot("Year").sum("Population").show(5)

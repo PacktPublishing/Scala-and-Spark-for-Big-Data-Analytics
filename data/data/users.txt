@@ -1,0 +1,10 @@
+1,John,Accountant
+2,Mark,Doctor
+3,Sam,Lawyer
+4,Liz,Doctor
+5,Eric,Accountant
+6,Beth,Accountant
+7,Larry,Engineer
+8,Mary,Cashier
+9,Dan,Doctor
+10,Ken,Librarian

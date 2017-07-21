@@ -1,0 +1,8 @@
+//Approximate Count Distince
+
+val statesPopulationDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+statesPopulationDF.select(col("*")).agg(approx_count_distinct("State")).show
+
+statesPopulationDF.select(approx_count_distinct("State", 0.2)).show
+

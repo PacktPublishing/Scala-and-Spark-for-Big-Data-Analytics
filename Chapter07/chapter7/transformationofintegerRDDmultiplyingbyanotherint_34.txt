@@ -1,0 +1,6 @@
+//Transformation of integer RDD multiplying each with another int
+
+val rdd_one = sc.parallelize(Seq(1,2,3))
+val m = scala.collection.mutable.HashMap(1 -> 2, 2 -> 3, 3 -> 4)
+val bm = sc.broadcast(m)
+rdd_one.map(j => j * bm.value(j)).take(5)

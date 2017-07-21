@@ -1,0 +1,3 @@
+//Loading CSV with header into a dataframe
+
+val statesDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")

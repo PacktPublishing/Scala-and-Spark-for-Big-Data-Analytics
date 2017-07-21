@@ -1,0 +1,4 @@
+//Last
+val statesPopulationDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+statesPopulationDF.select(last("State")).show

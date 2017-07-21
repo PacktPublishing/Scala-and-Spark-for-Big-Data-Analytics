@@ -1,0 +1,32 @@
+//Tokenization
+import org.apache.spark.ml.feature.Tokenizer
+import org.apache.spark.ml.feature.RegexTokenizer
+
+//CreateDataFrame
+val lines = Seq(
+ (1, "Hello there, how do you like the book so far?"),
+ (2, "I am new to Machine Learning"),
+ (3, "Maybe i should get some coffee before starting"),
+ (4, "Coffee is best when you drink it hot"),
+ (5, "Book stores have coffee too so i should go to a book store")
+ )
+
+val sentenceDF = spark.createDataFrame(lines).toDF("id", "sentence")
+
+
+//initializing a Tokenizer
+val tokenizer = new Tokenizer().setInputCol("sentence").setOutputCol("words")
+
+//invoking transform() function
+val wordsDF = tokenizer.transform(sentenceDF)
+
+//output dataset showing input columns id, sentence, and output column words 
+wordsDF.show(false)
+
+//regular expression based Tokenizer:
+val regexTokenizer = new RegexTokenizer().setInputCol("sentence").setOutputCol("regexWords").setPattern("\\W")
+
+//invoking the transform() function
+val regexWordsDF = regexTokenizer.transform(sentenceDF)
+
+regexWordsDF.show(false)

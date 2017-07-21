@@ -1,0 +1,8 @@
+//Coalesce
+
+val rdd_two = sc.textFile("wiki1.txt")
+rdd_two.partitions.length
+val rdd_three = rdd_two.coalesce(1)
+rdd_three.partitions.length
+
+

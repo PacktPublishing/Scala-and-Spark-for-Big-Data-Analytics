@@ -1,0 +1,11 @@
+//GroupBy
+
+val statesPopulationDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+
+statesPopulationDF.groupBy("State").count.show(5)
+
+
+//Can use GroupBy and then any aggregate function above
+
+statesPopulationDF.groupBy("State").agg(min("Population"), avg("Population")).show(5)

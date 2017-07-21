@@ -1,0 +1,11 @@
+//FlatMap Function
+
+val rdd_two = sc.textFile("wiki1.txt")
+rdd_two.count
+rdd_two.first
+val rdd_three = rdd_two.map(line => line.split(" "))
+
+rdd_three.take(1)
+val rdd_three = rdd_two.flatMap(line => line.split(" "))
+rdd_three.take(10)
+

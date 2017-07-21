@@ -1,0 +1,10 @@
+//Count
+
+val statesPopulationDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+
+statesPopulationDF.select(col("*")).agg(count("State")).show
+statesPopulationDF.select(count("State")).show
+
+statesPopulationDF.select(col("*")).agg(countDistinct("State")).show
+statesPopulationDF.select(countDistinct("State")).show

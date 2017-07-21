@@ -1,0 +1,7 @@
+//Loading data as RDD
+val rdd_one = sc.parallelize(Seq(1,2,3))
+rdd_one.take(10)
+
+
+
+

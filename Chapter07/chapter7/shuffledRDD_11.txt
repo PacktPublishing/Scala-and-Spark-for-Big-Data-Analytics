@@ -1,0 +1,10 @@
+//Shuffled RDD
+
+val statesPopulationRDD = sc.textFile("statesPopulation.csv")
+statesPopulationRDD.take(5)
+
+
+val pairRDD = statesPopulationRDD.map(record => (record.split(",")(0), 1))
+pairRDD.take(5)
+val shuffledRDD = pairRDD.reduceByKey(_+_)
+shuffledRDD.take(5)

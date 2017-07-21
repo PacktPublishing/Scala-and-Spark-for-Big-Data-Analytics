@@ -1,0 +1,9 @@
+//Creating Broadcast Variables
+
+val rdd_one = sc.parallelize(Seq(1,2,3))
+
+val i = 5
+val bi = sc.broadcast(i)
+bi.value
+rdd_one.take(5)
+rdd_one.map(j => j + bi.value).take(5)

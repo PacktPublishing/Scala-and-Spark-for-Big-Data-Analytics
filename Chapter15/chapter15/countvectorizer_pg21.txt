@@ -1,0 +1,53 @@
+//CountVectorizer
+import org.apache.spark.ml.feature.CountVectorizer
+
+//Stop Words Removal
+import org.apache.spark.ml.feature.StopWordsRemover
+
+//Tokenization
+import org.apache.spark.ml.feature.Tokenizer
+
+//CreateDataFrame
+val lines = Seq(
+ (1, "Hello there, how do you like the book so far?"),
+ (2, "I am new to Machine Learning"),
+ (3, "Maybe i should get some coffee before starting"),
+ (4, "Coffee is best when you drink it hot"),
+ (5, "Book stores have coffee too so i should go to a book store")
+ )
+
+val sentenceDF = spark.createDataFrame(lines).toDF("id", "sentence")
+
+
+//initializing a Tokenizer
+val tokenizer = new Tokenizer().setInputCol("sentence").setOutputCol("words")
+
+//invoking transform() function
+val wordsDF = tokenizer.transform(sentenceDF)
+
+//output dataset showing input columns id, sentence, and output column words 
+wordsDF.show(false)
+
+//Initialize a StopWordsRemoval
+val remover = new StopWordsRemover().setInputCol("words").setOutputCol("filteredWords")
+
+//invoke transform function
+val noStopWordsDF = remover.transform(wordsDF)
+
+//output Dataset
+noStopWordsDF.show(false)
+
+//output dataset showing only sentence and filtered words
+noStopWordsDF.select("sentence", "filteredWords").show(5,false)
+
+
+val countVectorizer = new CountVectorizer().setInputCol("filteredWords").setOutputCol("features")
+
+//fit()
+val countVectorizerModel = countVectorizer.fit(noStopWordsDF)
+
+//transform()
+val countVectorizerDF = countVectorizerModel.transform(noStopWordsDF)
+
+//output dataset
+countVectorizerDF.show(false)

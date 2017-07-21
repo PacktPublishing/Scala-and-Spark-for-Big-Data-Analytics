@@ -1,0 +1,6 @@
+//Implicit Schema
+
+val statesDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+statesDF.schema
+statesDF.printSchema

@@ -1,0 +1,11 @@
+//Union RDD
+
+val rdd_one = sc.parallelize(Seq(1,2,3))
+
+val rdd_two = sc.parallelize(Seq(4,5,6))
+val rdd_one = sc.parallelize(Seq(1,2,3))
+rdd_one.take(10)
+val rdd_two = sc.parallelize(Seq(4,5,6))
+rdd_two.take(10)
+val unionRDD = rdd_one.union(rdd_two)
+unionRDD.take(10)

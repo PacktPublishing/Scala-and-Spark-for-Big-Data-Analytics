@@ -1,0 +1,4 @@
+//Starting Streaming Context
+
+ssc.start()
+

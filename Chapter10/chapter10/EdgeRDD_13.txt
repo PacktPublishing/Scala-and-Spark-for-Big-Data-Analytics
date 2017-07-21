@@ -1,0 +1,41 @@
+import org.apache.spark._
+import org.apache.spark.graphx._
+import org.apache.spark.rdd.RDD
+
+import org.apache.spark.graphx.GraphLoader
+import org.apache.spark.graphx.GraphOps
+
+//Edge RDD
+
+val friends = sc.textFile("friends.txt").map{ line => 
+val fields = line.split(",")
+Edge(fields(0).toLong, fields(1).toLong, "friend")
+}
+
+friends.take(10)
+
+//Vertex ID Name Operation
+
+case class User(name: String, occupation: String)
+
+val users = sc.textFile("users.txt").map{ line =>
+ val fields = line.split(",")
+ (fields(0).toLong, User(fields(1), fields(2)))
+ }
+
+users.take(10)
+
+//Now to build a graph
+
+val graph = Graph(users, friends)
+
+graph.vertices
+
+graph.edges
+
+graph.vertices.collect
+
+graph.edges.collect
+
+		
+	

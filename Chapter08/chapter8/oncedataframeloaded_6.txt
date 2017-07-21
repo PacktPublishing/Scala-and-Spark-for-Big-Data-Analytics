@@ -1,0 +1,6 @@
+//Once dataframe is loaded
+val statesDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+statesDF.printSchema
+
+statesDF.explain(true)

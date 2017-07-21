@@ -1,0 +1,46 @@
+//Friend Structure
+
+case class Person(name: String) {
+ val friends = scala.collection.mutable.ArrayBuffer[Person]()
+
+ def numberOfFriends() = friends.length
+
+ def isFriend(other: Person) = friends.find(_.name == other.name)
+
+ def isConnectedWithin2Steps(other: Person) = {
+         for {f <- friends} yield {f.name == other.name || f.isFriend(other).isDefined}
+     }.find(_ == true).isDefined
+ }
+ 
+val john = Person("John")
+val ken = Person("Ken")
+
+val mary = Person("Mary")
+
+val dan = Person("Dan")
+
+john.numberOfFriends
+
+john.friends += ken
+
+john.numberOfFriends
+
+ken.friends += mary
+
+ken.numberOfFriends
+
+mary.friends += dan
+
+mary.numberOfFriends
+
+john.isFriend(ken)
+
+john.isFriend(mary)
+
+john.isFriend(dan)
+
+john.isConnectedWithin2Steps(ken)
+
+john.isConnectedWithin2Steps(mary)
+
+john.isConnectedWithin2Steps(dan)

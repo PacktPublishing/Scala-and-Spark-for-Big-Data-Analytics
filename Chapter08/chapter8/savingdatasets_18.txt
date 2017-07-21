@@ -1,0 +1,10 @@
+//Saving datasets
+
+val statesPopulationDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+val statesTaxRatesDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesTaxRates.csv")
+
+
+statesPopulationDF.write.option("header", "true").csv("statesPopulation_dup.csv")
+
+statesTaxRatesDF.write.option("header", "true").csv("statesTaxRates_dup.csv")

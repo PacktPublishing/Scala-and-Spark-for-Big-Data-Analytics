@@ -1,0 +1,4 @@
+//Encoders continued
+
+import org.apache.spark.sql.types.DataTypes._
+val arrayType = DataTypes.createArrayType(IntegerType)

@@ -1,0 +1,4 @@
+val rdd_one = sc.parallelize(Seq(1,2,3,4,5,6))
+rdd_one.count
+rdd_one.cache
+rdd_one.count

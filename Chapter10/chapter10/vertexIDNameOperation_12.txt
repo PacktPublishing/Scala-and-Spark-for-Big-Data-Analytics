@@ -1,0 +1,10 @@
+//Vertex ID Name Operation
+
+case class User(name: String, occupation: String)
+
+val users = sc.textFile("users.txt").map{ line =>
+ val fields = line.split(",")
+ (fields(0).toLong, User(fields(1), fields(2)))
+ }
+
+users.take(10)

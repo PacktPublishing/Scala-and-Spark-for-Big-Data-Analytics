@@ -1,0 +1,12 @@
+//CoGrouped RDD
+
+
+val statesPopulationRDD = sc.textFile("statesPopulation.csv")
+statesPopulationRDD.take(5)
+
+val pairRDD = statesPopulationRDD.map(record => (record.split(",")(0), record.split(",")(2)))
+val pairRDD2 = statesPopulationRDD.map(record => (record.split(",")(0), record.split(",")(1)))
+val cogroupRDD = pairRDD.cogroup(pairRDD2)
+
+cogroupRDD.take(10)
+

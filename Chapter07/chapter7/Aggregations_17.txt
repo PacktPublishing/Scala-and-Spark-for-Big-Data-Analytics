@@ -1,0 +1,4 @@
+//Aggregations
+
+val statesPopulationRDD = sc.textFile("statesPopulation.csv")
+statesPopulationRDD.take(5)

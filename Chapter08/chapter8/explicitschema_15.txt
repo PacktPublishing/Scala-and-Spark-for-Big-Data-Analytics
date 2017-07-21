@@ -1,0 +1,11 @@
+//Explicit Schema
+import org.apache.spark.sql.types.{StructType, IntegerType, StringType}
+
+//Define a schema with 2 columns/fields, an int followed by string
+val schema = new StructType().add("i", IntegerType).add("s", StringType)
+
+//Now print it
+schema.printTreeString
+
+//Can also print a Json
+schema.prettyJson

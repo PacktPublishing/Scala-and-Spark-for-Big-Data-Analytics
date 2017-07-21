@@ -1,0 +1,6 @@
+//UDFs
+
+val toUpper: String => String = _.toUpperCase
+
+//User Defined Function created:
+val toUpperUDF = udf(toUpper)

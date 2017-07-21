@@ -1,0 +1,4 @@
+//Stopping Streaming Context
+ssc.stop(false)
+
+ssc.stop(true, true)

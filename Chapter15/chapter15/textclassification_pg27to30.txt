@@ -1,0 +1,95 @@
+//Text classification
+
+//load input data
+val inputText = sc.textFile("Sentiment_Analysis_Dataset10k.csv")
+
+//convert to dataframe
+val sentenceDF = inputText.map(x => (x.split(",")(0),x.split(",")(1), x.split(",")(2))).toDF("id", "label", "sentence")
+
+
+//convert to tokenizer
+import org.apache.spark.ml.feature.Tokenizer
+
+val tokenizer = new Tokenizer().setInputCol("sentence").setOutputCol("words")
+val wordsDF = tokenizer.transform(sentenceDF)
+
+wordsDF.show(5, true)
+
+
+
+//remove stop words
+import org.apache.spark.ml.feature.StopWordsRemover
+
+val remover = new StopWordsRemover().setInputCol("words").setOutputCol("filteredWords")
+
+val noStopWordsDF = remover.transform(wordsDF)
+
+noStopWordsDF.show(5, true)
+
+
+//create feature vector
+import org.apache.spark.ml.feature.CountVectorizer
+
+val countVectorizer = new CountVectorizer().setInputCol("filteredWords").setOutputCol("features")
+
+val countVectorizerModel = countVectorizer.fit(noStopWordsDF)
+
+val countVectorizerDF = countVectorizerModel.transform(noStopWordsDF)
+
+countVectorizerDF.show(5,true)
+
+//input dataframe
+
+val inputData=countVectorizerDF.select("label","features").withColumn("label", col("label").cast("double"))
+
+val Array(trainingData, testData) = inputData.randomSplit(Array(0.8, 0.2))
+
+//logistic regression model
+import org.apache.spark.ml.classification.LogisticRegression
+
+val lr = new LogisticRegression()
+
+//logistic regression model by fitting trainingData
+var lrModel = lr.fit(trainingData)
+
+lrModel.coefficients
+
+lrModel.intercept
+
+
+//Examine model summary under areaROC
+
+import org.apache.spark.ml.classification.BinaryLogisticRegressionSummary
+
+val summary = lrModel.summary
+
+val bSummary = summary.asInstanceOf[BinaryLogisticRegressionSummary]
+
+
+
+//Examine model summary under areaROC continued
+
+bSummary.areaUnderROC
+
+bSummary.roc
+
+bSummary.pr.show()
+
+//Transform both datasets using model
+
+val training = lrModel.transform(trainingData)
+
+val test = lrModel.transform(testData)
+
+//count number of records that match label and prediction columns
+
+training.filter("label == prediction").count
+
+training.filter("label != prediction").count
+
+test.filter("label == prediction").count
+
+test.filter("label != prediction").count
+
+
+

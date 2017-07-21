@@ -1,0 +1,11 @@
+//Window Function
+//ntiles
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.expressions.Window
+
+val statesPopulationDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+
+val windowSpec = Window.partitionBy("State").orderBy(col("Population").desc).rowsBetween(Window.unboundedPreceding, Window.currentRow)
+
+statesPopulationDF.select(col("State"), col("Year"), max("Population").over(windowSpec), rank().over(windowSpec)).sort("State", "Year").show(10)

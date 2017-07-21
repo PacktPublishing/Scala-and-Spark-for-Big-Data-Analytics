@@ -1,0 +1,12 @@
+//Accumulator
+
+
+val statesPopulationRDD = sc.textFile("statesPopulation.csv")
+statesPopulationRDD.take(5)
+
+val acc1 = sc.longAccumulator("acc1")
+val someRDD = statesPopulationRDD.map(x => {acc1.add(1); x})
+acc1.value
+someRDD.count
+acc1.value
+acc1

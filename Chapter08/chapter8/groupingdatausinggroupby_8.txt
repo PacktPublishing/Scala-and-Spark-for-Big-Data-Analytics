@@ -1,0 +1,7 @@
+//Grouping data using GroupBy
+
+val statesDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+statesDF.createOrReplaceTempView("states")
+
+statesDF.groupBy("State").sum("Population").show(5)
+spark.sql("select State, sum(Population) from states group by State limit 5").show

@@ -1,0 +1,10 @@
+//DataFrame as table name
+
+val statesDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+statesDF.createOrReplaceTempView("states")
+
+//Commands to Operate on Table
+
+statesDF.show(5)
+spark.sql("select * from states limit 5").show

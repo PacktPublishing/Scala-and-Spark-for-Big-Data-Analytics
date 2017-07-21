@@ -1,0 +1,6 @@
+//Using collect function
+
+graph.vertices.collect
+
+graph.edges.collect
+

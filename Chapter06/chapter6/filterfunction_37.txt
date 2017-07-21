@@ -1,0 +1,8 @@
+//Filter Function
+
+val rdd_two = sc.textFile("wiki1.txt")
+rdd_two.count
+rdd_two.first
+val rdd_three = rdd_two.filter(line => line.contains("Spark"))
+rdd_three.count
+

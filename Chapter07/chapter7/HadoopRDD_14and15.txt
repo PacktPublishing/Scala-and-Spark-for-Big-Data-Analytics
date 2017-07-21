@@ -1,0 +1,3 @@
+//Hadoop RDD
+
+val statesPopulationRDD = sc.textFile("statesPopulation.csv")

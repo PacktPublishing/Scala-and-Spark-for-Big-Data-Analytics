@@ -1,0 +1,10 @@
+//RDD from sequence of numbers adding 2 to each element
+
+val rdd_one = sc.parallelize(Seq(1,2,3,4,5,6))
+rdd_one.take(100)
+
+val rdd_two = rdd_one.map(i => i * 3)
+rdd_two.take(10)
+
+val rdd_three = rdd_two.map(i => i+2)
+rdd_three.take(10)

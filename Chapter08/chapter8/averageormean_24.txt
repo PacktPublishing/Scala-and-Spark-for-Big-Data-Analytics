@@ -1,0 +1,5 @@
+//Average or Mean
+val statesPopulationDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+
+statesPopulationDF.select(avg("Population")).show

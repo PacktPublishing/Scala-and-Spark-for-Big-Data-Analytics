@@ -1,0 +1,13 @@
+//Range Partitioner
+import org.apache.spark.RangePartitioner
+
+val statesPopulationRDD = sc.textFile("statesPopulation.csv")
+statesPopulationRDD.take(5)
+
+val pairRDD = statesPopulationRDD.map(record =>(record.split(",")(0), 1))
+val rangePartitioner = new RangePartitioner(5, pairRDD)
+val rangePartitionedRDD = pairRDD.partitionBy(rangePartitioner)
+
+pairRDD.mapPartitionsWithIndex((i,x) => Iterator(""+i +":"+x.length)).take(10)
+
+rangePartitionedRDD.mapPartitionsWithIndex((i,x) => Iterator(""+i +":"+x.length)).take(10)

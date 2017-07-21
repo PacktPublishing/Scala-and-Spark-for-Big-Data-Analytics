@@ -1,0 +1,10 @@
+//Multiple aggregations at the same time
+
+val statesDF = spark.read.option("header", "true").option("inferschema", "true").option("sep", ",").csv("statesPopulation.csv")
+
+statesDF.groupBy("State").agg(min("Population").alias("minTotal"),max("Population").alias("maxTotal"),avg("Population").alias("avgTotal")).sort(col("minTotal").desc).show(5)
+
+
+statesDF.createOrReplaceTempView("states")
+
+spark.sql("select State, min(Population) as minTotal,max(Population) as maxTotal, avg(Population) as avgTotal from states group by State order by minTotal desc limit 5").show
